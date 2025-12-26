@@ -5,15 +5,28 @@ services:
     image: chatwoot/chatwoot:latest
     volumes:
       - storage_data:/app/storage
+    environment: &base-env
+      SECRET_KEY_BASE: e17bbb4a227adaeefe004befde5f4c97ad8db7f4c0539d22c2ce4f9e5528fa8de02d28e6ecfefef54ac210d906e5bc62a7968e4edaede24fc929fe5dc9130fba
+      RAILS_ENV: production
+      NODE_ENV: production
+      RAILS_MAX_THREADS: 5
+      INSTALLATION_ENV: docker
+      FRONTEND_URL: https://chat.presencasocial.com
+      FORCE_SSL: "true"
+      POSTGRES_HOST: chatwoot-postgres-xps7ge
+      POSTGRES_PORT: 5432
+      POSTGRES_DATABASE: chatwoot_production
+      POSTGRES_USERNAME: chatwoot
+      POSTGRES_PASSWORD: "wPZdf5ev%o25Bgn^tuyxSx"
+      REDIS_URL: "redis://default:oo3R@3eLeYPvgzezZg6L5U@chatwoot-redis-wqb1rr:6379"
+      REDIS_PASSWORD: "oo3R@3eLeYPvgzezZg6L5U"
+      ENABLE_ACCOUNT_SIGNUP: "false"
+      MAILER_SENDER_EMAIL: suporte@socialabs.com.br
 
   rails:
     <<: *base
     expose:
       - "3000"
-    environment:
-      - NODE_ENV=production
-      - RAILS_ENV=production
-      - INSTALLATION_ENV=docker
     entrypoint: docker/entrypoints/rails.sh
     command: ['bundle', 'exec', 'rails', 's', '-p', '3000', '-b', '0.0.0.0']
     restart: always
@@ -22,10 +35,6 @@ services:
 
   sidekiq:
     <<: *base
-    environment:
-      - NODE_ENV=production
-      - RAILS_ENV=production
-      - INSTALLATION_ENV=docker
     command: ['bundle', 'exec', 'sidekiq', '-C', 'config/sidekiq.yml']
     restart: always
     networks:
