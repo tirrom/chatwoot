@@ -18,7 +18,7 @@ services:
       POSTGRES_DATABASE: chatwoot_production
       POSTGRES_USERNAME: chatwoot
       POSTGRES_PASSWORD: "wPZdf5ev%o25Bgn^tuyxSx"
-      REDIS_URL: "redis://default:oo3R@3eLeYPvgzezZg6L5U@chatwoot-redis-wqb1rr:6379"
+      REDIS_URL: "redis://default:oo3R%403eLeYPvgzezZg6L5U@chatwoot-redis-wqb1rr:6379"
       REDIS_PASSWORD: "oo3R@3eLeYPvgzezZg6L5U"
       ENABLE_ACCOUNT_SIGNUP: "false"
       MAILER_SENDER_EMAIL: suporte@socialabs.com.br
